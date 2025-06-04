@@ -15,10 +15,15 @@ import okhttp3.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class NewsAPIHandler {
+    private final String baseURL;
     private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private String getApiKey() {
+    public NewsAPIHandler(String baseURL) {
+        this.baseURL = baseURL;
+    }
+
+    String getApiKey() {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
             Properties prop = new Properties();
             prop.load(input);
@@ -29,7 +34,7 @@ public class NewsAPIHandler {
     }
 
     public CompletableFuture<List<Article>> getResponse(String keyword, String language, String sortBy) {
-        String destUrl = "https://newsapi.org/v2/everything?q=" + keyword +
+        String destUrl = baseURL + "?q=" + keyword +
                 "&language=" + language +
                 "&sortBy=" + sortBy +
                 "&apiKey=" + getApiKey();
@@ -70,7 +75,7 @@ public class NewsAPIHandler {
             });
         }).start(8080);
 
-        NewsAPIHandler handler = new NewsAPIHandler();
+        NewsAPIHandler handler = new NewsAPIHandler("https://newsapi.org/v2/everything");
 
         app.get("/api/news", ctx -> {
             ctx.future(() -> {
