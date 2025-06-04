@@ -8,6 +8,6 @@ RUN mvn -q -DskipTests package
 # ---------- runtime ----------
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /build/target/*shaded.jar app.jar
+COPY --from=build /build/target/*-fat.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/app.jar"]

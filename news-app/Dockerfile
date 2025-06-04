@@ -18,7 +18,7 @@ RUN printf 'server {\n\
     server_name _;\n\
     root /usr/share/nginx/html;\n\
     location /api/ {\n\
-        proxy_pass http://ms-news:8080/;\n\
+        proxy_pass http://ms-news:8080;\n\
     }\n\
     location / { try_files $uri /index.html; }\n\
 }' > /etc/nginx/conf.d/default.conf
