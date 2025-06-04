@@ -1,10 +1,12 @@
 # ---------- build ----------
 FROM node:20 AS build
 WORKDIR /client
-COPY news-app/package*.json ./
+
+COPY package*.json ./
 RUN npm ci
-COPY news-app .
-RUN npm run build          # build/ готов
+
+COPY . .
+RUN npm run build
 
 # ---------- runtime ----------
 FROM nginx:1.25-alpine
@@ -21,4 +23,5 @@ RUN printf 'server {\n\
     location / { try_files $uri /index.html; }\n\
 }' > /etc/nginx/conf.d/default.conf
 
-EXPOSE 80                  # наружу отдаём через 3001
+EXPOSE 80
+
