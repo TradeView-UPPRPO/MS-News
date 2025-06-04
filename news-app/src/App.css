@@ -1,0 +1,26 @@
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.news-container {
+  display: grid;
+  gap: 20px;
+}
+
+.news-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.error {
+  color: red;
+}
