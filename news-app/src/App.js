@@ -44,7 +44,7 @@ function App() {
               sortBy: selectedSortBy
             }).toString();
 
-      const response = await fetch(`http://localhost:8080/api/news?${queryParams}`);
+      const response = await fetch(`/api/news?keyword=${keyword}&language=ru&sortBy=publishedAt&apiKey=…`);
       console.log('Response status:', response.status);
 
       if (!response.ok) {
